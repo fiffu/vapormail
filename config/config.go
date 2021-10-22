@@ -1,11 +1,12 @@
 package config
 
 import (
-	"github.com/spf13/viper"
-)
+	"os"
+	"path"
+	"path/filepath"
 
-const (
-	CONFIG_FILE_NAME = "config.ini"
+	log "github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 type Config struct {
@@ -18,24 +19,44 @@ type Config struct {
 	SMTPWelcomeMsg  string
 }
 
-func SetupConfig() Config {
-	viper.SetDefault("ServerNamespace", "default namespace")
-	viper.SetDefault("ServerSecret", "default secret")
-	viper.SetDefault("ClientHeartbeatSecs", 3)
+func getExecutableDir() string {
+	ex, _ := os.Executable()
+	abspath, err := filepath.Abs(path.Dir(ex))
+	if err != nil {
+		log.WithError(err).Error("failed to get current executable path")
+	}
+	return abspath
+}
 
-	viper.AddConfigPath("./" + CONFIG_FILE_NAME)
-	viper.ReadInConfig()
+func SetupConfig() Config {
+	abspath := filepath.Join(getExecutableDir(), ConfigFileName+"."+ConfigType)
+	log.Infof("Searching for config=%s type=%s in path %s", ConfigFileName, ConfigType, abspath)
+	viper.SetConfigFile(abspath)
+
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			// Config file not found; ignore error if desired
+			log.Warnf("Config file not found: %s", ConfigFileName)
+		} else {
+			// Config file was found but another error was produced
+			log.WithError(err).Errorf("Errored while trying to load config")
+		}
+	}
+
+	viper.SetDefault(ServerNamespace, "default namespace")
+	viper.SetDefault(ServerSecret, "default secret")
+	viper.SetDefault(ClientHeartbeat, 3)
 
 	return Config{
-		ServerNamespace: viper.GetString("ServerNamespace"),
-		ServerSecret:    viper.GetString("ServerSecret"),
+		ServerNamespace: viper.GetString(ServerNamespace),
+		ServerSecret:    viper.GetString(ServerSecret),
 
-		ClientHeartbeat: viper.GetInt("ClientHeartbeatSecs"),
+		ClientHeartbeat: viper.GetInt(ClientHeartbeat),
 
-		APIPort: viper.GetInt(""),
+		APIPort: viper.GetInt(APIPort),
 
-		SMTPPort:       viper.GetInt(""),
-		SMTPHostName:   viper.GetString("SMTPHostName"),
-		SMTPWelcomeMsg: viper.GetString(""),
+		SMTPPort:       viper.GetInt(SMTPPort),
+		SMTPHostName:   viper.GetString(SMTPHostName),
+		SMTPWelcomeMsg: viper.GetString(SMTPWelcomeMsg),
 	}
 }
