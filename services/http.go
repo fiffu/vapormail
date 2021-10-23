@@ -31,6 +31,7 @@ func (s *HTTPService) Start() {
 
 	s.setupMeta(router, "/")
 	s.setupAPI(router, "/api")
+	s.setupGUI(router, "/ui")
 
 	router.Run(fmt.Sprintf(":%d", s.Port))
 }

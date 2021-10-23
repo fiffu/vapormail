@@ -1,10 +1,10 @@
 package config
 
 import (
-	"os"
-	"path"
+	"fmt"
 	"path/filepath"
 
+	"github.com/fiffu/vprmail/utils"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
@@ -19,17 +19,12 @@ type Config struct {
 	SMTPWelcomeMsg  string
 }
 
-func getExecutableDir() string {
-	ex, _ := os.Executable()
-	abspath, err := filepath.Abs(path.Dir(ex))
+func SetupConfig() Config {
+	here, err := utils.GetRuntimeDir()
 	if err != nil {
 		log.WithError(err).Error("failed to get current executable path")
 	}
-	return abspath
-}
-
-func SetupConfig() Config {
-	abspath := filepath.Join(getExecutableDir(), ConfigFileName+"."+ConfigType)
+	abspath := filepath.Join(here, fmt.Sprintf("%s.%s", ConfigFileName, ConfigType))
 	log.Infof("Searching for config=%s type=%s in path %s", ConfigFileName, ConfigType, abspath)
 	viper.SetConfigFile(abspath)
 
