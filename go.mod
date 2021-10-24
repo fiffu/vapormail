@@ -1,4 +1,4 @@
-module github.com/fiffu/vprmail
+module github.com/fiffu/vapormail
 
 go 1.16
 
