@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/fiffu/vprmail/config"
-	"github.com/fiffu/vprmail/services"
-	"github.com/fiffu/vprmail/services/hub"
+	"github.com/fiffu/vapormail/config"
+	"github.com/fiffu/vapormail/services"
+	"github.com/fiffu/vapormail/services/hub"
 	log "github.com/sirupsen/logrus"
 )
 

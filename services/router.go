@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/fiffu/vprmail/dto"
-	"github.com/fiffu/vprmail/utils"
+	"github.com/fiffu/vapormail/dto"
+	"github.com/fiffu/vapormail/utils"
 	"github.com/gin-gonic/gin"
 )
 

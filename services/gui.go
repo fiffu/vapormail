@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/fiffu/vprmail/ui"
+	"github.com/fiffu/vapormail/ui"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )

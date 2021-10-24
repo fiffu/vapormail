@@ -1,7 +1,7 @@
 package hub
 
 import (
-	"github.com/fiffu/vprmail/utils"
+	"github.com/fiffu/vapormail/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )

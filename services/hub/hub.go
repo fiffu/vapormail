@@ -3,8 +3,8 @@ package hub
 import (
 	"time"
 
-	"github.com/fiffu/vprmail/config"
-	"github.com/fiffu/vprmail/dto"
+	"github.com/fiffu/vapormail/config"
+	"github.com/fiffu/vapormail/dto"
 )
 
 type HubService struct {

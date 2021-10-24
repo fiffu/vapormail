@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/fiffu/vprmail/utils"
+	"github.com/fiffu/vapormail/utils"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

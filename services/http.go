@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/fiffu/vprmail/services/hub"
-	"github.com/fiffu/vprmail/utils"
+	"github.com/fiffu/vapormail/services/hub"
+	"github.com/fiffu/vapormail/utils"
 	"github.com/gin-gonic/gin"
 	requestid "github.com/sumit-tembe/gin-requestid"
 )
