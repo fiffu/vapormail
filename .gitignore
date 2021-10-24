@@ -4,3 +4,4 @@
 # Artifacts
 *.exe
 vendor
+config.yml
