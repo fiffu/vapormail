@@ -19,6 +19,6 @@ func main() {
 	hub := hub.NewHubService(cfg)
 
 	// HTTP API server
-	httpAPI := services.NewHTTPService(cfg.APIPort, hub)
+	httpAPI := services.NewHTTPService(cfg.APIPort, cfg.SMTPHostName, hub)
 	httpAPI.Start()
 }

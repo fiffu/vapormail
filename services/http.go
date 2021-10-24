@@ -11,14 +11,16 @@ import (
 )
 
 type HTTPService struct {
-	Port int
-	Hub  *hub.HubService
+	Port        int
+	Hub         *hub.HubService
+	InboxDomain string
 }
 
-func NewHTTPService(port int, hubSvc *hub.HubService) HTTPService {
+func NewHTTPService(port int, domain string, hubSvc *hub.HubService) HTTPService {
 	return HTTPService{
-		Port: port,
-		Hub:  hubSvc,
+		Port:        port,
+		InboxDomain: domain,
+		Hub:         hubSvc,
 	}
 }
 
@@ -31,7 +33,7 @@ func (s *HTTPService) Start() {
 
 	s.setupMeta(router, "/")
 	s.setupAPI(router, "/api")
-	s.setupGUI(router, "/ui")
+	s.setupGUI(router, "/")
 
 	router.Run(fmt.Sprintf(":%d", s.Port))
 }

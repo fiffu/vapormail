@@ -3,19 +3,31 @@ package ui
 import (
 	"path/filepath"
 
-	"github.com/fiffu/vprmail/utils"
+	"github.com/fiffu/vapormail/utils"
 )
 
 const (
-	staticFolder  = "templates"
-	fileHtmlIndex = "index.html"
+	here            = "ui"
+	templatesFolder = "templates"
+	staticsFolder   = "static"
+	fileHtmlIndex   = "index.html"
 )
 
 func Index() string {
 	return fileHtmlIndex
 }
 
-func GetTemplatesGlob() string {
-	here, _ := utils.GetRuntimeDir()
-	return filepath.Join(here, "ui", staticFolder)
+func fromHere(args ...string) string {
+	root, _ := utils.GetRuntimeDir()
+	abspath := []string{root, here}
+	abspath = append(abspath, args...)
+	return filepath.Join(abspath...)
+}
+
+func GetStaticsDir() string {
+	return fromHere(staticsFolder)
+}
+
+func GetTemplatesDir() string {
+	return fromHere(templatesFolder)
 }

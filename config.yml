@@ -2,3 +2,4 @@ ServerNamespace: "default namespace"
 ServerSecret: "default secret"
 SMTPPort: 25
 APIPort: 6066
+SMTPHostName: "localhost:25"
